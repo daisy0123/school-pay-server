@@ -38,7 +38,8 @@ class User {
         $password = $user['password'];
         $dbResult = Db::table('sp_user')->where('username',$username)->where('password',$password)->find();
         if ($dbResult) {
-            $result =['state' => $this ->success(), 'data'=> ['isLogin' => true]]; 
+            $userData = ['isLogin' => true, 'userid' => $dbResult['userid'], 'username' => $username];
+            $result =['state' => $this ->success(), 'data'=> $userData]; 
         }else {
             $result =['state' => $this ->success(), 'data'=> ['isLogin' => false]];  
         }
